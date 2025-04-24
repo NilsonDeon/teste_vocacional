@@ -15,7 +15,6 @@ const nomesCursos = {
   C8: "Engenharia Química",
 };
 
-
 const textosCursos = {
   C1: [
     "Gosto de aprender sobre motores, turbinas e sistemas de uma aeronave.",
@@ -88,7 +87,6 @@ const perguntasBase = [
   { opcoes: ["C3", "C4", "C5", "C6"] },
 ];
 
-
 const contagemCursos = {};
 
 const perguntasComTexto = perguntasBase.map((pergunta) => {
@@ -116,6 +114,7 @@ export default function TesteVocacional() {
   const [etapa, setEtapa] = useState(0);
   const [respostas, setRespostas] = useState([]);
   const [inicio, setInicio] = useState(true);
+  const [confirmado, setConfirmado] = useState(false);
 
   const cursos = {};
   respostas.forEach((r) => {
@@ -150,30 +149,55 @@ export default function TesteVocacional() {
               <h2 className="text-3xl font-bold mb-4">
                 Match da Engenharia ❤️
               </h2>
-              <p className="mb-6 text-lg">
-                Descubra aqui qual curso mais combina com você!
+              <p className="mb-4 text-lg">
+                Antes de começar, por favor preencha o formulário abaixo:
               </p>
+
+              <div className="mb-4">
+                <iframe
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSdL6QCpBXrzJNzLTZdtEyDI_65UWU_03UYNmBB6yyoAgbzaDQ/viewform?embedded=true"
+                  width="500"
+                  height="750"
+                >
+                  Carregando…
+                </iframe>
+              </div>
+
+              <div className="mb-6 flex items-center justify-center gap-2">
+                <input
+                  type="checkbox"
+                  id="confirmado"
+                  checked={confirmado}
+                  onChange={(e) => setConfirmado(e.target.checked)}
+                />
+                <label htmlFor="confirmado" className="text-sm">
+                  Declaro que já preenchi o formulário do Google acima.
+                </label>
+              </div>
+
               <Button
                 onClick={iniciarTeste}
-                className="text-lg p-6 bg-[#01446E] text-white"
+                disabled={!confirmado}
+                className={`${
+                  !confirmado ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
                 Iniciar Teste
               </Button>
             </div>
           ) : etapa < perguntas.length ? (
             <div>
-              <h2 className="text-2xl font-bold mb-4">
+              <h3 className="text-xl font-semibold mb-4">
                 Pergunta {etapa + 1} de {perguntas.length}
-              </h2>
-              <div className="flex flex-col gap-4">
-                {perguntas[etapa].opcoes.map((opcao, index) => (
+              </h3>
+              <div className="space-y-4">
+                {perguntas[etapa].opcoes.map(({ texto, curso }, idx) => (
                   <Button
-                    key={index}
-                    onClick={() => selecionarCurso(opcao.curso)}
-                    className="w-full text-left text-lg p-12 bg-[#01446E] text-white"
-                    style={{ whiteSpace: "normal", wordWrap: "break-word" }}
+                    key={idx}
+                    onClick={() => selecionarCurso(curso)}
+                    className="w-full"
                   >
-                    {opcao.texto}
+                    {texto}
                   </Button>
                 ))}
               </div>
@@ -184,16 +208,16 @@ export default function TesteVocacional() {
               <p className="mb-4 text-lg">
                 Aqui estão os três cursos com que você tem mais afinidade!
               </p>
-              {rankingCursos.map(([codigo, _], index) => (
-                <p key={codigo} className="text-xl font-semibold mb-2">
-                  {index + 1}. {nomesCursos[codigo]}
-                </p>
-              ))}
-              <Button
-                onClick={reiniciar}
-                className="text-lg p-6 bg-[#01446E] text-white mt-6"
-              >
-                Refazer teste
+              <ol className="list-decimal list-inside font-bold">
+                {rankingCursos.map(([codigo]) => (
+                  <li key={codigo} className="text-xl font-semibold mb-2">
+                    {nomesCursos[codigo]}
+                  </li>
+                ))}
+              </ol>
+
+              <Button onClick={reiniciar} className="mt-6">
+                Refazer Teste
               </Button>
             </div>
           )}
@@ -202,4 +226,3 @@ export default function TesteVocacional() {
     </div>
   );
 }
-
