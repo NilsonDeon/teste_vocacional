@@ -1,6 +1,6 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "./components/ui/Card.jsx";
 import { Button } from "./components/ui/Button";
 
@@ -24,52 +24,52 @@ const textosCursos = {
     "Fico empolgado com projetos e tecnologias voltadas para o setor aéreo.",
   ],
   C2: [
-    "Me atrai a ideia de acompanhar obras e resolver problemas no canteiro.",
-    "Gosto de entender como são construídos prédios, pontes e estradas.",
-    "Me interesso por projetos de obras e planejamento de construções.",
-    "Fico empolgado com projetos que envolvem cálculo estrutural e resistência dos materiais.",
-    "Tenho curiosidade sobre materiais como concreto, aço e asfalto.",
+    "Gosto da ideia de participar de obras que transformam cidades, como edifícios, pontes e estradas.",
+    "Tenho interesse em entender como funcionam os sistemas que levam água até as casas, e os que cuidam do esgoto e do lixo.",
+    "Acho interessante planejar formas de organizar o trânsito, melhorar ruas e pensar em soluções para o transporte urbano.",
+    "Me chama atenção como o solo influencia nas construções e como lidar com isso para garantir segurança e evitar desmoronamentos.",
+    "Tenho curiosidade para saber como garantir que uma construção seja segura e dure por muitos anos, sem cair.",
   ],
   C3: [
-    "Me interesso por sistemas automáticos que controlam máquinas e processos industriais.",
-    "Me atrai a ideia de trabalhar com sensores, atuadores e sistemas de controle em tempo real.",
-    "Gosto de entender como funcionam os sistemas de robótica e automação em fábricas.",
+    "Me interesso por sistemas automáticos para o controle de iluminação, climatização e segurança em edifícios.",
+    "Me atrai a ideia de trabalhar com a criação de programas para colocar em funcionamento veículos autônomos (sem motorista).",
+    "Gosto de entender como funcionam os sistemas de robótica e como programar robôs para automação em fábricas.",
     "Tenho curiosidade sobre como programar e controlar dispositivos eletrônicos e mecânicos.",
     "Fico empolgado com a ideia de criar soluções para melhorar a eficiência de processos automatizados.",
   ],
   C4: [
-    "Me interesso por logística, cadeia de suprimentos e controle de qualidade na produção.",
-    "Fico empolgado com a ideia de implementar soluções que reduzam custos e aumentem a produtividade.",
-    "Me atrai a ideia de melhorar a gestão de recursos, como tempo, materiais e pessoas.",
-    "Tenho interesse em planejar e organizar a produção de bens e serviços.",
-    "Gosto de entender como otimizar processos e aumentar a eficiência de fábricas e indústrias.",
+    "Tenho interesse por processos e produtividade – adoro pensar em como melhorar o funcionamento das coisas!",
+    "Fico empolgado por dados e gráficos – curto tomar decisões com base em números.",
+    "Me chama a atenção tudo que envolve projetos, metas e prazos – planejamento é comigo mesmo!",
+    "Tenho interesse por pessoas e como elas trabalham – gosto de entender e melhorar o ambiente de trabalho.",
+    "Fico empolgado com a ideia de empreender e inovar – quero criar soluções que impactem o mercado e o mundo.",
   ],
   C5: [
-    "Tenho interesse por tecnologias que envolvem eletrônica e sistemas de comunicação.",
+    "Tenho interesse por tecnologias que envolvem eletricidade, eletrônica e sistemas computacionais.",
     "Me atrai a ideia de trabalhar com instalações elétricas e soluções para geração de energia.",
-    "Fico empolgado com projetos que envolvem automação e controle de processos elétricos.",
-    "Gosto de entender como funcionam circuitos elétricos e sistemas de energia.",
-    "Me interesso por inovação em sistemas de eletricidade, como energias renováveis e redes inteligentes.",
+    "Fico empolgado com projetos que envolvem automação e controle de sistemas elétricos.",
+    "Gosto de entender como funcionam circuitos elétricos e sistemas de energia elétrica.",
+    "Me interesso por inovação, como energias renováveis (eólica e solar) e redes inteligentes.",
   ],
   C6: [
-    "Me interesso por cálculos e simulações de sistemas mecânicos e termodinâmicos.",
-    "Gosto de entender como funcionam máquinas e dispositivos mecânicos.",
-    "Tenho curiosidade sobre o funcionamento de motores, turbinas e mecanismos de movimentação.",
-    "Me atrai a ideia de trabalhar com a análise e otimização de processos mecânicos e térmicos.",
-    "Fico empolgado com a ideia de projetar e melhorar equipamentos para indústrias e veículos.",
+    "Gosto de desmontar e montar objetos como brinquedos, ventiladores ou eletrodomésticos, para entender como funcionam.",
+    "Me interesso por coisas como carros, bicicletas, motores ou qualquer tipo de máquina.",
+    "Tenho facilidade com matemática e física e gosto de usar isso para resolver problemas práticos.",
+    "Gosto da ideia de criar ou melhorar objetos como ferramentas, máquinas ou sistemas.",
+    "Me imagino trabalhando em equipe para resolver desafios usando tecnologia e criatividade.",
   ],
   C7: [
-    "Fico empolgado com a combinação de engenharia mecânica e eletrônica para criar soluções inovadoras.",
-    "Me atrai a ideia de trabalhar com sistemas mecatrônicos para melhorar a automação industrial.",
-    "Tenho interesse em projetar e controlar robôs e dispositivos automatizados.",
-    "Me interesso por tecnologias que envolvem sensores, atuadores e controle em sistemas automatizados.",
-    "Gosto de entender como integrar mecânica, eletrônica e computação em sistemas inteligentes.",
+    "Adoro usar tecnologia e inovação para criar robôs e sistemas que facilitam a nossa vida.",
+    "Tenho interesse em programar e desenvolver inteligência artificial para fazer máquinas aprenderem sozinhas.",
+    "Gosto de trabalhar com robôs móveis e sistemas automatizados que podem se mover e tomar decisões por conta própria.",
+    "Quero aprender a combinar eletrônica, software e mecânica para criar soluções inteligentes e modernas.",
+    "Me fascina pensar em máquinas que usam sensores, inteligência artificial e automação para funcionar de forma inteligente.",
   ],
   C8: [
-    "Gosto de entender como as coisas são feitas, desde o shampoo até os combustíveis.",
-    "Tenho curiosidade sobre como a química é usada na indústria para transformar materiais.",
-    "Fico empolgado em desenvolver ou melhorar processos químicos na indústria.",
-    "Tenho interesse em entender como funcionam as indústrias de alimentos, combustíveis e medicamentos.",
+    "Me atrai a ideia de melhorar processos complexos para torná-los mais rápidos, seguros e eficientes em indústrias de todos os tipos.",
+    "Quero encontrar soluções para reduzir impactos ambientais, tratando resíduos, reaproveitando energia e protegendo recursos naturais.",
+    "Gosto da ideia de trabalhar em laboratório e desenvolver novas tecnologias que possam transformar o futuro.",
+    "Gosto da ideia de transformar matérias-primas em produtos que mudam o mundo, como medicamentos, cosméticos, combustíveis e alimentos.",
     "Me empolga a ideia de melhorar a eficiência de processos químicos, tornando-os mais sustentáveis.",
   ],
 };
@@ -87,17 +87,6 @@ const perguntasBase = [
   { opcoes: ["C3", "C4", "C5", "C6"] },
 ];
 
-const contagemCursos = {};
-
-const perguntasComTexto = perguntasBase.map((pergunta) => {
-  const opcoesComTexto = pergunta.opcoes.map((curso) => {
-    contagemCursos[curso] = (contagemCursos[curso] || 0) + 1;
-    let texto = textosCursos[curso][contagemCursos[curso] - 1];
-    return { texto, curso };
-  });
-  return { opcoes: opcoesComTexto };
-});
-
 function embaralhar(array) {
   return array
     .map((item) => ({ item, sort: Math.random() }))
@@ -105,16 +94,32 @@ function embaralhar(array) {
     .map(({ item }) => item);
 }
 
-const perguntas = perguntasComTexto.map((pergunta) => ({
-  ...pergunta,
-  opcoes: embaralhar(pergunta.opcoes),
-}));
-
 export default function TesteVocacional() {
   const [etapa, setEtapa] = useState(0);
   const [respostas, setRespostas] = useState([]);
-  const [inicio, setInicio] = useState(true);
-  const [confirmado, setConfirmado] = useState(false);
+  const [perguntas, setPerguntas] = useState([]);
+
+  useEffect(() => {
+    const perguntasComTexto = perguntasBase.map((pergunta) => {
+      const contagemCursos = {};
+      const opcoesComTexto = pergunta.opcoes.map((curso) => {
+        contagemCursos[curso] = (contagemCursos[curso] || 0) + 1;
+        const index = contagemCursos[curso] - 1;
+        return { texto: textosCursos[curso][index], curso };
+      });
+
+      return {
+        ...pergunta,
+        opcoes: embaralhar(opcoesComTexto),
+      };
+    });
+
+    setPerguntas(perguntasComTexto);
+  }, []);
+
+  if (!perguntas.length) {
+    return null;
+  }
 
   const cursos = {};
   respostas.forEach((r) => {
@@ -133,65 +138,23 @@ export default function TesteVocacional() {
   function reiniciar() {
     setEtapa(0);
     setRespostas([]);
-    setInicio(true);
-  }
-
-  function iniciarTeste() {
-    setInicio(false);
   }
 
   return (
     <div className="max-w-xl mx-auto mt-10">
       <Card>
         <CardContent className="p-6">
-          {inicio ? (
-            <div className="text-center">
-              <h2 className="text-3xl font-bold mb-4">
-                Match da Engenharia ❤️
-              </h2>
-              <p className="mb-4 text-lg">
-                Antes de começar, por favor preencha o formulário abaixo:
-              </p>
+          <h2 className="text-3xl font-bold mb-4 text-center">
+            Match da Engenharia ❤️
+          </h2>
 
-              <div className="mb-4">
-                <iframe
-                  src="https://docs.google.com/forms/d/e/1FAIpQLSdL6QCpBXrzJNzLTZdtEyDI_65UWU_03UYNmBB6yyoAgbzaDQ/viewform?embedded=true"
-                  width="500"
-                  height="750"
-                >
-                  Carregando…
-                </iframe>
-              </div>
-
-              <div className="mb-6 flex items-center justify-center gap-2">
-                <input
-                  type="checkbox"
-                  id="confirmado"
-                  checked={confirmado}
-                  onChange={(e) => setConfirmado(e.target.checked)}
-                />
-                <label htmlFor="confirmado" className="text-sm">
-                  Declaro que já preenchi o formulário do Google acima.
-                </label>
-              </div>
-
-              <Button
-                onClick={iniciarTeste}
-                disabled={!confirmado}
-                className={`${
-                  !confirmado ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                Iniciar Teste
-              </Button>
-            </div>
-          ) : etapa < perguntas.length ? (
+          {etapa < perguntas.length ? (
             <div>
               <h3 className="text-xl font-semibold mb-4">
                 Pergunta {etapa + 1} de {perguntas.length}
               </h3>
               <div className="space-y-4">
-                {perguntas[etapa].opcoes.map(({ texto, curso }, idx) => (
+                {perguntas[etapa]?.opcoes.map(({ texto, curso }, idx) => (
                   <Button
                     key={idx}
                     onClick={() => selecionarCurso(curso)}
@@ -215,7 +178,6 @@ export default function TesteVocacional() {
                   </li>
                 ))}
               </ol>
-
               <Button onClick={reiniciar} className="mt-6">
                 Refazer Teste
               </Button>
